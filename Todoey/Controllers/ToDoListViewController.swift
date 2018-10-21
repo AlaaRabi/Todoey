@@ -9,23 +9,34 @@
 import UIKit
 
 class ToDoListViewController: UITableViewController{
-    var itemArray = [String]()
+    var itemArray = [Item]()
     var defaults  = UserDefaults.standard
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     
-        if let todolist = defaults.value(forKey: "ToDoListArray") as? [String] {
+    
+        
+        
+        if let todolist = defaults.array(forKey: "ToDoListArray") as? [Item] {
             itemArray = todolist
             
         }
+
+
     }
     
     //MARK - Table View DataSoruce Methods
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = itemArray[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell",for :indexPath)
-        cell.textLabel?.text = itemArray[indexPath.row]
+        cell.textLabel?.text = item.title
+        
+        cell.accessoryType  = item.done ? .checkmark : .none
+        
         
          return cell
     }
@@ -59,7 +70,10 @@ class ToDoListViewController: UITableViewController{
             //what will happen when add is pressed
             
 //            let textField = Alert.textFields![0] // Force unwrapping because we know it exists.
-          self.itemArray.append(textFeild.text!)
+            let item = Item()
+            item.title = textFeild.text!
+          self.itemArray.append(item)
+            
             self.defaults.set(self.itemArray, forKey: "ToDoListArray")
             self.tableView.reloadData()
             

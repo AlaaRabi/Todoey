@@ -10,10 +10,15 @@ import UIKit
 
 class ToDoListViewController: UITableViewController{
     var itemArray = [String]()
-    var note:String = ""
+    var defaults  = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    
+        if let todolist = defaults.value(forKey: "ToDoListArray") as? [String] {
+            itemArray = todolist
+            
+        }
     }
     
     //MARK - Table View DataSoruce Methods
@@ -55,6 +60,7 @@ class ToDoListViewController: UITableViewController{
             
 //            let textField = Alert.textFields![0] // Force unwrapping because we know it exists.
           self.itemArray.append(textFeild.text!)
+            self.defaults.set(self.itemArray, forKey: "ToDoListArray")
             self.tableView.reloadData()
             
         }

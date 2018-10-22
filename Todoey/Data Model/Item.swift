@@ -7,12 +7,9 @@
 //
 
 import Foundation
-class Item {
+class Item :Codable {
     var title :String = ""
     var done: Bool = false
   
-//    init(title:String,isDone:Bool) {
-//        self.title = title
-//       self.done = isDone
-//    }
+// to be able to be encodable  all properties must have standerd data type 
 }

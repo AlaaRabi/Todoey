@@ -11,6 +11,7 @@ import CoreData
 
 class ToDoListViewController: UITableViewController {
     var itemArray = [Item]()
+    
     var selectedCategory : Category? {
         didSet{
             loadItems()
@@ -25,8 +26,8 @@ class ToDoListViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
          loadItems()
-       print( FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist"))
-        
+//       print( FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist"))
+//        
         
         
         
